@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+    <head>
+        <title>Simple Form</title>
+        <style>
+            input[type=text], input[type=email], input[type=tel], input[type=password] {
+            display: block;
+            margin-bottom: 10px;
+            }
+            form {
+            max-width: 500px;
+            margin: auto;
+            }
+            label {
+            display: block;
+            margin-bottom: 10px;
+            }
+            input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            }
+            input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            }
+            input[type="submit"]:hover {
+            background-color: #45a049;
+            }
+            .error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 10px;
+            }
+            .success {
+            color: green;
+            font-weight: bold;
+            margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Simple Form</h1>
+        <form action="#" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone number:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value=""></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Submit</button>
+        </form>
+        
+        <script>
+            // highlight empty fields on submit
+            document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formValid = true;
+            var inputFields = document.querySelectorAll('input, select');
+            for (var i = 0; i < inputFields.length; i++) {
+                if (!inputFields[i].value) {
+                inputFields[i].classList.add('invalid');
+                formValid = false;
+                } else {
+                inputFields[i].classList.remove('invalid');
+                }
+            }
+            if (formValid) {
+                // submit form
+                console.log('Form submitted');
+                // display success message
+                alert("Thank you! Your submission was successful.");
+                // reset form
+                document.querySelector('form').reset();
+            }
+            });
+
+            // display error message for invalid email address
+            document.querySelector('#email').addEventListener('input', function(event) {
+            var emailField = event.target;
+            var emailValue = emailField.value;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+            }
+            
+            // Optionally, you can also clear the form fields after submission
+            form.reset();
+            });
+        </script>
+    </body>
+</html>
